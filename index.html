@@ -1,14 +1,195 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>project</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureLogix - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Add basic fallback for custom fonts if needed */
+    body { font-family: 'Inter', -apple-system, sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="logo">
+          <span class="logo-text">SecureLogix</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="security.html">Security</a></li>
+          <li><a href="logistics.html">Logistics</a></li>
+          <li><a href="tracking.html">Track Shipment</a></li>
+          <li><a href="admin.html">Admin</a></li>
+          <li><a href="quote.html" class="btn-quote">Get Quote</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="home">
+        <section class="hero">
+          <div class="container">
+            <div class="hero-content">
+              <h1>Secure Storage, Reliable Logistics</h1>
+              <p>
+                Protecting high-value assets and delivering critical shipments worldwide.
+                Trusted by industries requiring maximum security, compliance, and reliability
+                since 1990.
+              </p>
+              <div class="hero-buttons">
+                <a href="quote.html" class="btn btn-primary">Request Quote</a>
+                <a href="tracking.html" class="btn btn-secondary">Track Shipment</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="metrics">
+          <div class="container">
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="metric-number">34+</div>
+                <div class="metric-label">Years Experience</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-number">200+</div>
+                <div class="metric-label">Global Partners</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-number">98</div>
+                <div class="metric-label">Courier Network</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-number">618</div>
+                <div class="metric-label">Daily Deliveries</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="services-overview">
+          <div class="container">
+            <h2>Our Core Services</h2>
+
+            <div class="services-grid">
+              <a href="security.html" class="service-card">
+                <div class="service-icon">🔒</div>
+                <h3>Security Services</h3>
+                <p>
+                  High-security vaults, warehousing, safety deposits, gem storage, and
+                  document protection. Comprehensive solutions for assets requiring
+                  maximum security and climate control.
+                </p>
+                <span class="service-link">Explore Security →</span>
+              </a>
+
+              <a href="logistics.html" class="service-card">
+                <div class="service-icon">📦</div>
+                <h3>Logistics Services</h3>
+                <p>
+                  Global door-to-door delivery with real-time tracking. Express and
+                  high-value transport solutions for time-sensitive and critical
+                  shipments worldwide.
+                </p>
+                <span class="service-link">Explore Logistics →</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="industries">
+          <div class="container">
+            <h2>Industries We Serve</h2>
+            <div class="industries-grid">
+              <div class="industry-card">
+                <h4>Financial Services</h4>
+                <p>Banks, investment firms requiring secure document and asset storage.</p>
+              </div>
+              <div class="industry-card">
+                <h4>Jewelry & Gems</h4>
+                <p>High-value precious stones and metals with specialized security.</p>
+              </div>
+              <div class="industry-card">
+                <h4>Legal & Compliance</h4>
+                <p>Confidential documents requiring long-term secure archival.</p>
+              </div>
+              <div class="industry-card">
+                <h4>Healthcare</h4>
+                <p>Medical supplies, equipment, and sensitive records logistics.</p>
+              </div>
+              <div class="industry-card">
+                <h4>Technology</h4>
+                <p>Critical components and prototypes with tracking and security.</p>
+              </div>
+              <div class="industry-card">
+                <h4>Infrastructure</h4>
+                <p>Large-scale logistics for construction and development projects.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cta">
+          <div class="container">
+            <div class="cta-content">
+              <h2>Ready to Secure Your Assets?</h2>
+              <p>Get a customized quote for your security and logistics needs.</p>
+              <a href="quote.html" class="btn btn-primary">Get Started</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h3>SecureLogix</h3>
+            <p>Trusted security and logistics solutions since 1990.</p>
+          </div>
+
+          <div class="footer-section">
+            <h4>Services</h4>
+            <ul>
+              <li>Vault Access & Storage</li>
+              <li>Global Logistics</li>
+              <li>Document Management</li>
+              <li>High-Value Transport</li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4>Contact</h4>
+            <p>Bangkok, Thailand</p>
+            <p>Mon - Fri: 8AM - 5PM</p>
+            <p>Email: info@securelogix.com</p>
+          </div>
+
+          <div class="footer-section">
+            <h4>Company</h4>
+            <ul>
+              <li>200+ Partners</li>
+              <li>98 Couriers</li>
+              <li>618 Daily Deliveries</li>
+              <li>34+ Years Experience</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2024 SecureLogix. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
 </html>

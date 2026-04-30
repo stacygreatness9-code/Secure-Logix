@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureLogix - Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Admin specific styles */
+    .bg-navy { background-color: #0f172a; }
+    .text-navy { color: #0f172a; }
+    .border-navy { border-color: #0f172a; }
+    .bg-gold { background-color: #fbbf24; }
+    .text-gold { color: #fbbf24; }
+    .border-gold { border-color: #fbbf24; }
+  </style>
+</head>
+<body>
+  <div class="app min-h-screen flex flex-col bg-[#fdfcf7] text-slate-800">
+    <nav class="navbar relative z-50">
+      <div class="container">
+        <a href="index.html" class="logo">
+          <span class="logo-text">SecureLogix</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="admin.html">Admin</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="flex-1 flex overflow-hidden h-[calc(100vh-64px)]">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-navy text-white flex flex-col z-20 shadow-xl flex-shrink-0">
+        <div class="p-6 border-b border-slate-700">
+          <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+            <span class="text-gold">⛨</span> Secure<span class="text-gold">Logix</span>
+          </h1>
+          <p class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Admin Operations</p>
+        </div>
+        
+        <nav class="flex-1 py-6 flex flex-col gap-2">
+          <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-btn flex items-center gap-3 px-6 py-3 text-sm font-medium text-left transition-colors bg-amber-400/10 text-gold border-r-4 border-gold">
+            <span class="text-lg">🏠</span> Operations Hub
+          </button>
+          <button onclick="switchView('keys')" id="nav-keys" class="nav-btn flex items-center gap-3 px-6 py-3 text-sm font-medium text-left transition-colors text-slate-300 hover:text-white hover:bg-slate-800">
+            <span class="text-lg">🔑</span> Key Authority
+          </button>
+          <button onclick="switchView('tracking')" id="nav-tracking" class="nav-btn flex items-center gap-3 px-6 py-3 text-sm font-medium text-left transition-colors text-slate-300 hover:text-white hover:bg-slate-800">
+            <span class="text-lg">🚚</span> Fleet Tracking
+          </button>
+          <button onclick="switchView('vaults')" id="nav-vaults" class="nav-btn flex items-center gap-3 px-6 py-3 text-sm font-medium text-left transition-colors text-slate-300 hover:text-white hover:bg-slate-800">
+            <span class="text-lg">🏛️</span> Vault Monitor
+          </button>
+        </nav>
+
+        <div class="p-6 border-t border-slate-700 text-xs text-slate-400">
+          <p>System Status: <span class="text-emerald-400 font-bold">SECURE</span></p>
+          <p class="mt-1">Role: <span class="capitalize">operator</span></p>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 overflow-y-auto w-full bg-[#fdfcf7]">
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10">
+          <div>
+            <h2 id="header-title" class="text-xl font-bold text-navy">Operations Hub</h2>
+            <p id="header-desc" class="text-sm text-slate-500">System overview and daily metrics</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="bg-slate-100 px-3 py-1 rounded-full text-xs font-bold text-slate-600 border border-slate-200">👤 Admin_01</span>
+            <span class="bg-red-50 text-red-600 px-3 py-1 rounded-full text-xs font-bold border border-red-200 cursor-pointer hover:bg-red-100">LOCKDOWN</span>
+          </div>
+        </header>
+
+        <div class="p-8 max-w-7xl mx-auto">
+          <!-- View: Dashboard -->
+          <section id="view-dashboard" class="view-section block animate-in fade-in duration-500">
+            <div class="mb-8">
+              <p class="text-slate-600 max-w-3xl leading-relaxed">
+                Welcome to the SecureLogix Administration interface. This centralized hub provides an aggregated overview of our global logistics network, high-value asset storage, and key generation authority. Ensure all actions are logged and authorized.
+              </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+              <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm border-t-4 border-t-navy hover:-translate-y-1 hover:shadow-md transition-all">
+                <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">Active Shipments</div>
+                <div class="text-3xl font-bold text-navy">618</div>
+                <div class="text-emerald-500 text-xs font-bold mt-2">↑ 12% vs last week</div>
+              </div>
+              <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm border-t-4 border-t-navy hover:-translate-y-1 hover:shadow-md transition-all">
+                <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">Fleet Status</div>
+                <div class="text-3xl font-bold text-navy">98/98</div>
+                <div class="text-emerald-500 text-xs font-bold mt-2">100% Operational</div>
+              </div>
+              <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm border-t-4 border-t-navy hover:-translate-y-1 hover:shadow-md transition-all">
+                <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">Vault Alerts</div>
+                <div class="text-3xl font-bold text-navy">0</div>
+                <div class="text-slate-400 text-xs font-bold mt-2">All sensors nominal</div>
+              </div>
+              <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm border-t-4 border-t-gold bg-gradient-to-br from-white to-amber-50 hover:-translate-y-1 hover:shadow-md transition-all">
+                <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">Keys Issued (24h)</div>
+                <div class="text-3xl font-bold text-navy">142</div>
+                <div class="text-slate-400 text-xs font-bold mt-2">Zero-Knowledge Protocols Active</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- View: Keys -->
+          <section id="view-keys" class="view-section hidden animate-in fade-in duration-500">
+            <div class="mb-8">
+                <p class="text-slate-600 max-w-3xl leading-relaxed">
+                    The Key Authority module is the sole generator of cryptographic tracking identifiers and temporary vault access hashes. Use this zero-knowledge simulation environment to issue secure access credentials for physical logbooks and logistics handover events.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-navy p-4 border-b border-slate-700">
+                        <h3 class="text-white font-bold flex items-center gap-2">📦 Shipment Key Generator</h3>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-sm text-slate-500 mb-6">Generates a unique, non-sequential identifier for global armored transit.</p>
+                        <div class="mb-6">
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Origin Hub</label>
+                            <select id="hub-select" class="w-full border border-slate-300 rounded-md p-2 text-navy focus:ring-2 focus:ring-gold outline-none">
+                                <option value="BKK">Bangkok (BKK)</option>
+                                <option value="SIN">Singapore (SIN)</option>
+                                <option value="HKG">Hong Kong (HKG)</option>
+                            </select>
+                        </div>
+                        <button onclick="generateShipmentKey()" class="w-full bg-navy text-white font-bold py-3 rounded-md hover:bg-slate-800 transition mb-6 shadow-md border border-slate-700">
+                            Generate Tracking ID
+                        </button>
+                        <div class="mt-auto">
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Generated Output</label>
+                            <div class="bg-slate-50 border border-slate-200 rounded-md p-4 flex justify-between items-center">
+                                <span id="shipment-output" class="font-mono text-lg text-navy font-bold tracking-widest">---</span>
+                                <button onclick="copyText('shipment-output')" class="text-slate-400 hover:text-navy" title="Copy to Clipboard">📋</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-navy p-4 border-b border-slate-700 relative overflow-hidden">
+                        <div class="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-gold opacity-20"></div>
+                        <h3 class="text-white font-bold flex items-center gap-2 relative z-10">🏛️ Vault Access Hash</h3>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-sm text-slate-500 mb-6">Creates a secure 12-character alphanumeric code for temporary physical vault clearance.</p>
+                        <div class="mb-6">
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Hash Expiry</label>
+                            <div class="flex gap-4">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="expiry" value="1h" checked class="text-gold focus:ring-gold accent-gold" />
+                                    <span class="text-sm font-medium text-navy">1 Hour</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="expiry" value="24h" class="text-gold focus:ring-gold accent-gold" />
+                                    <span class="text-sm font-medium text-navy">24 Hours</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button onclick="generateVaultCode()" class="w-full bg-gold text-navy font-bold py-3 rounded-md hover:bg-yellow-500 transition mb-6 shadow-md border border-yellow-600">
+                            Generate Vault Code
+                        </button>
+                        <div class="mt-auto">
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Generated Output</label>
+                            <div class="bg-navy border border-slate-800 rounded-md p-4 flex justify-between items-center">
+                                <span id="vault-output" class="font-mono text-lg text-emerald-400 font-bold tracking-widest">---</span>
+                                <button onclick="copyText('vault-output')" class="text-slate-400 hover:text-white" title="Secure Print / Copy">🖨️</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </section>
+
+          <!-- View: Tracking -->
+          <section id="view-tracking" class="view-section hidden animate-in fade-in duration-500">
+             <div class="mb-8">
+                  <p class="text-slate-600 max-w-3xl leading-relaxed">
+                      The Fleet Tracking module provides real-time oversight of armored transit vehicles. Input a verified tracking identifier to initialize the secure timeline and monitor live telemetry data overlaid on the Bangkok grid simulation.
+                  </p>
+              </div>
+              <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-8">
+                  <div class="flex flex-col md:flex-row gap-4 items-end">
+                      <div class="flex-1 w-full">
+                          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Tracking ID</label>
+                          <input type="text" id="admin-tracking-input" placeholder="e.g. SL-BKK-2024-XXXX" class="w-full border border-slate-300 rounded-md p-3 text-navy font-mono focus:ring-2 focus:ring-gold outline-none" />
+                      </div>
+                      <button onclick="simulateTracking()" class="bg-navy text-white font-bold py-3 px-8 rounded-md hover:bg-slate-800 transition">
+                          Initiate Trace
+                      </button>
+                  </div>
+              </div>
+
+              <div id="tracking-display" class="grid grid-cols-1 lg:grid-cols-3 gap-8 hidden">
+                  <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 lg:col-span-1">
+                      <h3 class="text-navy font-bold mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">⏳ Transit Timeline</h3>
+                      <div class="pl-2 relative" id="tracking-timeline-container">
+                          <!-- Populated by JS -->
+                      </div>
+                  </div>
+                  <div class="bg-navy rounded-xl border border-slate-800 shadow-inner p-2 lg:col-span-2 relative h-96 flex flex-col">
+                      <div class="absolute top-4 left-4 z-10 bg-slate-900/80 backdrop-blur px-3 py-1 rounded text-xs text-emerald-400 font-mono border border-slate-700">
+                          LIVE TELEMETRY ●
+                      </div>
+                      <div class="w-full h-full bg-slate-900 rounded-lg overflow-hidden relative">
+                          <canvas id="map-canvas" class="w-full h-full absolute inset-0"></canvas>
+                      </div>
+                  </div>
+              </div>
+          </section>
+
+          <!-- View: Vaults -->
+          <section id="view-vaults" class="view-section hidden animate-in fade-in duration-500">
+            <div class="mb-8">
+                <p class="text-slate-600 max-w-3xl leading-relaxed">
+                    The Vault Monitor displays active telemetry from physical storage facilities. This dashboard visualizes environmental controls (Temperature and Humidity) and physical security metrics (Vibration analysis) to ensure absolute asset integrity.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-navy text-sm uppercase tracking-wider">Climate: Temp</h3>
+                        <span id="temp-val" class="text-emerald-500 font-mono text-sm bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">20.0°C</span>
+                    </div>
+                    <div class="relative h-[200px] flex-1">
+                        <canvas id="tempChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-navy text-sm uppercase tracking-wider">Climate: Humidity</h3>
+                        <span id="hum-val" class="text-emerald-500 font-mono text-sm bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">45.0%</span>
+                    </div>
+                    <div class="relative h-[200px] flex-1">
+                        <canvas id="humChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-navy text-sm uppercase tracking-wider">Seismic / Auth</h3>
+                        <span class="text-gold font-mono text-sm bg-amber-50 px-2 py-0.5 rounded border border-amber-100">SECURE</span>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-center space-y-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-bold text-slate-500 mb-1">
+                                <span>Vibration Variance</span>
+                                <span id="vib-val">0.000g</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+                                <div id="vib-bar" class="h-2 rounded-full transition-all duration-300 bg-navy" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded p-4 text-center">
+                            <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Active Unit</div>
+                            <div class="text-xl font-bold text-navy">Gem Vault 04</div>
+                            <div class="text-xs text-emerald-600 mt-1 flex justify-center items-center gap-1">
+                                <span>🔒</span> Multi-Sig Engaged
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </section>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const viewsData = {
+      dashboard: { title: 'Operations Hub', desc: 'System overview and daily metrics' },
+      keys: { title: 'Key Authority', desc: 'Generate secure hashes and tracking identifiers' },
+      tracking: { title: 'Fleet Tracking', desc: 'Real-time transit visualization and timeline mapping' },
+      vaults: { title: 'Vault Monitor', desc: 'Environmental telemetry and access audits' }
+    };
+
+    function switchView(view) {
+      document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+      document.getElementById('view-' + view).classList.remove('hidden');
+      
+      document.querySelectorAll('.nav-btn').forEach(el => {
+        el.className = 'nav-btn flex items-center gap-3 px-6 py-3 text-sm font-medium text-left transition-colors text-slate-300 hover:text-white hover:bg-slate-800';
+      });
+      document.getElementById('nav-' + view).className = 'nav-btn flex items-center gap-3 px-6 py-3 text-sm font-medium text-left transition-colors bg-amber-400/10 text-gold border-r-4 border-gold';
+      
+      document.getElementById('header-title').innerText = viewsData[view].title;
+      document.getElementById('header-desc').innerText = viewsData[view].desc;
+      
+      if(view === 'vaults' && !window.chartsInitialized) {
+        initCharts();
+        window.chartsInitialized = true;
+      }
+    }
+
+    // Key Generation
+    function generateShipmentKey() {
+      const year = new Date().getFullYear();
+      const randomHex = Math.floor(Math.random() * 0x10000).toString(16).toUpperCase().padStart(4, '0');
+      const hub = document.getElementById('hub-select').value;
+      document.getElementById('shipment-output').innerText = `SL-${hub}-${year}-${randomHex}`;
+    }
+
+    function generateVaultCode() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let code = '';
+      for(let i=0; i<12; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+      document.getElementById('vault-output').innerText = code.match(/.{1,4}/g).join('-');
+    }
+
+    function copyText(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      if(text !== '---') navigator.clipboard.writeText(text).catch(() => {});
+    }
+
+    // Tracking Simulation
+    const trackingSteps = [
+        { title: "Hub Pickup", desc: "Verified at Bangkok Hub" },
+        { title: "Security Clearance", desc: "Biometric auth confirmed" },
+        { title: "Armored Transit", desc: "En route via secure corridor" },
+        { title: "Final Handover", desc: "Arrived at destination vault" }
+    ];
+    let trackInterval;
+
+    function simulateTracking() {
+        if(!document.getElementById('admin-tracking-input').value) return;
+        document.getElementById('tracking-display').classList.remove('hidden');
+        clearInterval(trackInterval);
+        
+        let currentStep = 0;
+        const container = document.getElementById('tracking-timeline-container');
+        
+        const renderSteps = () => {
+            container.innerHTML = trackingSteps.map((step, idx) => {
+                const isActive = currentStep === idx + 1;
+                const isCompleted = currentStep > idx + 1;
+                return `
+                    <div class="relative pl-8 pb-8">
+                        ${idx !== trackingSteps.length - 1 ? `<div class="absolute left-[0.45rem] top-5 bottom-[-0.25rem] w-[2px] ${isCompleted ? 'bg-navy' : 'bg-slate-200'} z-0"></div>` : ''}
+                        <div class="absolute left-0 top-1 w-4 h-4 rounded-full border-2 z-10 ${isActive ? 'bg-gold border-[#b45309] shadow-[0_0_10px_rgba(251,191,36,0.5)]' : isCompleted ? 'bg-navy border-navy' : 'bg-slate-200 border-slate-300'}"></div>
+                        <h4 class="font-bold text-sm ${isActive || isCompleted ? 'text-navy' : 'text-slate-400'}">${step.title}</h4>
+                        <p class="text-xs mt-1 ${isActive ? 'text-gold font-bold' : 'text-slate-400'}">${isActive || isCompleted ? step.desc : 'Pending verification'}</p>
+                    </div>
+                `;
+            }).join('');
+        };
+        
+        renderSteps();
+        trackInterval = setInterval(() => {
+            if(currentStep < trackingSteps.length) {
+                currentStep++;
+                renderSteps();
+            } else {
+                clearInterval(trackInterval);
+            }
+        }, 1500);
+    }
+
+    // Vault Monitoring (Chart.js)
+    function initCharts() {
+        const commonOptions = {
+            responsive: true, maintainAspectRatio: false, animation: { duration: 0 },
+            plugins: { legend: { display: false } },
+            scales: { x: { display: false }, y: { border: { display: false }, grid: { color: '#f1f5f9' } } }
+        };
+        const initialData = Array(20).fill(0).map((_, i) => i);
+        
+        const tempChart = new Chart(document.getElementById('tempChart'), {
+            type: 'line',
+            data: { labels: initialData, datasets: [{ data: Array(20).fill(20).map(v => v + (Math.random() * 0.4 - 0.2)), borderColor: '#0f172a', borderWidth: 2, tension: 0.4, pointRadius: 0 }] },
+            options: { ...commonOptions, scales: { y: { min: 19, max: 21 } } }
+        });
+
+        const humChart = new Chart(document.getElementById('humChart'), {
+            type: 'line',
+            data: { labels: initialData, datasets: [{ data: Array(20).fill(45).map(v => v + (Math.random() * 2 - 1)), borderColor: '#3b82f6', borderWidth: 2, tension: 0.4, pointRadius: 0 }] },
+            options: { ...commonOptions, scales: { y: { min: 40, max: 50 } } }
+        });
+
+        setInterval(() => {
+            const newTemp = 20 + (Math.random() * 0.4 - 0.2);
+            tempChart.data.datasets[0].data.shift();
+            tempChart.data.datasets[0].data.push(newTemp);
+            tempChart.update();
+            document.getElementById('temp-val').innerText = newTemp.toFixed(1) + '°C';
+
+            const newHum = 45 + (Math.random() * 2 - 1);
+            humChart.data.datasets[0].data.shift();
+            humChart.data.datasets[0].data.push(newHum);
+            humChart.update();
+            document.getElementById('hum-val').innerText = newHum.toFixed(1) + '%';
+
+            const vib = Math.random() * 0.05;
+            document.getElementById('vib-val').innerText = vib.toFixed(3) + 'g';
+            const vibBar = document.getElementById('vib-bar');
+            vibBar.style.width = Math.min(100, vib * 1000) + '%';
+            vibBar.className = `h-2 rounded-full transition-all duration-300 ${vib > 0.04 ? 'bg-gold' : 'bg-navy'}`;
+        }, 2000);
+    }
+  </script>
+</body>
+</html>

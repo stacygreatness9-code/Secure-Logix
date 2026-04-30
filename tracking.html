@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureLogix - Track Shipment</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="logo">
+          <span class="logo-text">SecureLogix</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="security.html">Security</a></li>
+          <li><a href="logistics.html">Logistics</a></li>
+          <li><a href="tracking.html">Track Shipment</a></li>
+          <li><a href="admin.html">Admin</a></li>
+          <li><a href="quote.html" class="btn-quote">Get Quote</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="tracking-page">
+        <section class="page-hero">
+          <div class="container">
+            <h1>Track Your Shipment</h1>
+            <p>Enter your tracking number for real-time updates.</p>
+          </div>
+        </section>
+
+        <section class="tracking-section">
+          <div class="container">
+            <div class="tracking-form-container">
+              <form id="track-form" class="tracking-form">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="tracking-number"
+                    placeholder="Enter tracking number"
+                    class="tracking-input"
+                    required
+                  />
+                  <button type="submit" id="track-btn" class="btn btn-primary">Track</button>
+                </div>
+              </form>
+
+              <div id="error-message" class="alert alert-error" style="display: none;"></div>
+
+              <div id="tracking-results" class="tracking-results" style="display: none;">
+                <div class="shipment-header">
+                  <div class="shipment-info">
+                    <h2 id="shipment-id-text">Tracking Number: </h2>
+                    <div id="status-badge" class="status-badge status-progress">IN TRANSIT</div>
+                  </div>
+
+                  <div class="shipment-details">
+                    <div class="detail-row">
+                      <span class="label">From:</span>
+                      <span class="value" id="shipment-from">ACME Corp, London, UK</span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="label">To:</span>
+                      <span class="value" id="shipment-to">Global Tech, New York, USA</span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="label">Type:</span>
+                      <span class="value" id="shipment-type">High-Value Transport</span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="label">Current Location:</span>
+                      <span class="value" id="shipment-location">Heathrow Airport Hub</span>
+                    </div>
+                    <div class="detail-row">
+                      <span class="label">Est. Delivery:</span>
+                      <span class="value" id="shipment-eta">In 2 days</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tracking-timeline">
+                  <h3>Tracking History</h3>
+                  <div class="timeline" id="timeline">
+                    <!-- Events will be populated by JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h3>SecureLogix</h3>
+            <p>Trusted security and logistics solutions since 1990.</p>
+          </div>
+          <div class="footer-section">
+            <h4>Services</h4>
+            <ul>
+              <li>Vault Access & Storage</li>
+              <li>Global Logistics</li>
+              <li>Document Management</li>
+              <li>High-Value Transport</li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Contact</h4>
+            <p>Bangkok, Thailand</p>
+            <p>Mon - Fri: 8AM - 5PM</p>
+            <p>Email: info@securelogix.com</p>
+          </div>
+          <div class="footer-section">
+            <h4>Company</h4>
+            <ul>
+              <li>200+ Partners</li>
+              <li>98 Couriers</li>
+              <li>618 Daily Deliveries</li>
+              <li>34+ Years Experience</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 SecureLogix. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('track-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const trackingNumber = document.getElementById('tracking-number').value.trim();
+      const errorEl = document.getElementById('error-message');
+      const resultsEl = document.getElementById('tracking-results');
+      const btn = document.getElementById('track-btn');
+      
+      btn.innerText = 'Tracking...';
+      btn.disabled = true;
+      errorEl.style.display = 'none';
+      resultsEl.style.display = 'none';
+
+      // Simulate network request
+      setTimeout(() => {
+        btn.innerText = 'Track';
+        btn.disabled = false;
+        
+        if (trackingNumber.length < 5) {
+          errorEl.innerText = 'Tracking number not found. Please check and try again.';
+          errorEl.style.display = 'block';
+        } else {
+          document.getElementById('shipment-id-text').innerText = 'Tracking Number: ' + trackingNumber;
+          
+          // Generate mock timeline
+          const timeline = document.getElementById('timeline');
+          timeline.innerHTML = `
+            <div class="timeline-event">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <div class="event-time">${new Date().toLocaleString()}</div>
+                <div class="event-location">In Transit Hub</div>
+                <div class="event-description">Shipment arrived at intermediate processing facility.</div>
+                <div class="event-status">IN_TRANSIT</div>
+              </div>
+            </div>
+            <div class="timeline-event">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <div class="event-time">${new Date(Date.now() - 86400000).toLocaleString()}</div>
+                <div class="event-location">Origin Facility</div>
+                <div class="event-description">Shipment picked up from sender.</div>
+                <div class="event-status">PICKED_UP</div>
+              </div>
+            </div>
+          `;
+          
+          resultsEl.style.display = 'block';
+        }
+      }, 800);
+    });
+  </script>
+</body>
+</html>
