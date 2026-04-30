@@ -19,7 +19,7 @@
 </head>
 <body>
   <div class="app min-h-screen flex flex-col bg-[#fdfcf7] text-slate-800">
-    <nav class="navbar relative z-50">
+    <nav aria-label="Main Navigation" class="navbar relative z-50">
       <div class="container">
         <a href="index.html" class="logo">
           <span class="logo-text">SecureLogix</span>
@@ -41,7 +41,7 @@
           <p class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Admin Operations</p>
         </div>
         
-        <nav class="flex-1 py-6 flex flex-col gap-2">
+        <nav aria-label="Admin Operations" class="flex-1 py-6 flex flex-col gap-2">
           <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-btn flex items-center gap-3 px-6 py-3 text-sm font-medium text-left transition-colors bg-amber-400/10 text-gold border-r-4 border-gold">
             <span class="text-lg">🏠</span> Operations Hub
           </button>
@@ -122,7 +122,7 @@
                     <div class="p-6 flex-1 flex flex-col">
                         <p class="text-sm text-slate-500 mb-6">Generates a unique, non-sequential identifier for global armored transit.</p>
                         <div class="mb-6">
-                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Origin Hub</label>
+                            <label for="hub-select" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Origin Hub</label>
                             <select id="hub-select" class="w-full border border-slate-300 rounded-md p-2 text-navy focus:ring-2 focus:ring-gold outline-none">
                                 <option value="BKK">Bangkok (BKK)</option>
                                 <option value="SIN">Singapore (SIN)</option>
@@ -136,7 +136,7 @@
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Generated Output</label>
                             <div class="bg-slate-50 border border-slate-200 rounded-md p-4 flex justify-between items-center">
                                 <span id="shipment-output" class="font-mono text-lg text-navy font-bold tracking-widest">---</span>
-                                <button onclick="copyText('shipment-output')" class="text-slate-400 hover:text-navy" title="Copy to Clipboard">📋</button>
+                                <button onclick="copyText('shipment-output')" class="text-slate-400 hover:text-navy" title="Copy to Clipboard" aria-label="Copy to Clipboard">📋</button>
                             </div>
                         </div>
                     </div>
@@ -152,12 +152,12 @@
                         <div class="mb-6">
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Hash Expiry</label>
                             <div class="flex gap-4">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="expiry" value="1h" checked class="text-gold focus:ring-gold accent-gold" />
+                                <label for="expiry-1h" class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" id="expiry-1h" name="expiry" value="1h" checked class="text-gold focus:ring-gold accent-gold" />
                                     <span class="text-sm font-medium text-navy">1 Hour</span>
                                 </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="expiry" value="24h" class="text-gold focus:ring-gold accent-gold" />
+                                <label for="expiry-24h" class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" id="expiry-24h" name="expiry" value="24h" class="text-gold focus:ring-gold accent-gold" />
                                     <span class="text-sm font-medium text-navy">24 Hours</span>
                                 </label>
                             </div>
@@ -169,7 +169,7 @@
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Generated Output</label>
                             <div class="bg-navy border border-slate-800 rounded-md p-4 flex justify-between items-center">
                                 <span id="vault-output" class="font-mono text-lg text-emerald-400 font-bold tracking-widest">---</span>
-                                <button onclick="copyText('vault-output')" class="text-slate-400 hover:text-white" title="Secure Print / Copy">🖨️</button>
+                                <button onclick="copyText('vault-output')" class="text-slate-400 hover:text-white" title="Secure Print / Copy" aria-label="Secure Print / Copy">🖨️</button>
                             </div>
                         </div>
                     </div>
@@ -187,7 +187,7 @@
               <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-8">
                   <div class="flex flex-col md:flex-row gap-4 items-end">
                       <div class="flex-1 w-full">
-                          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Tracking ID</label>
+                          <label for="admin-tracking-input" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Tracking ID</label>
                           <input type="text" id="admin-tracking-input" placeholder="e.g. SL-BKK-2024-XXXX" class="w-full border border-slate-300 rounded-md p-3 text-navy font-mono focus:ring-2 focus:ring-gold outline-none" />
                       </div>
                       <button onclick="simulateTracking()" class="bg-navy text-white font-bold py-3 px-8 rounded-md hover:bg-slate-800 transition">
@@ -208,7 +208,7 @@
                           LIVE TELEMETRY ●
                       </div>
                       <div class="w-full h-full bg-slate-900 rounded-lg overflow-hidden relative">
-                          <canvas id="map-canvas" class="w-full h-full absolute inset-0"></canvas>
+                          <canvas id="map-canvas" aria-label="Tracking Map" role="img" class="w-full h-full absolute inset-0"></canvas>
                       </div>
                   </div>
               </div>
@@ -228,7 +228,7 @@
                         <span id="temp-val" class="text-emerald-500 font-mono text-sm bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">20.0°C</span>
                     </div>
                     <div class="relative h-[200px] flex-1">
-                        <canvas id="tempChart"></canvas>
+                        <canvas id="tempChart" aria-label="Temperature Chart" role="img"></canvas>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col">
@@ -237,7 +237,7 @@
                         <span id="hum-val" class="text-emerald-500 font-mono text-sm bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">45.0%</span>
                     </div>
                     <div class="relative h-[200px] flex-1">
-                        <canvas id="humChart"></canvas>
+                        <canvas id="humChart" aria-label="Humidity Chart" role="img"></canvas>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col">
